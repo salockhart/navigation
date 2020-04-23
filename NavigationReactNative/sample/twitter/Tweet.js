@@ -1,17 +1,25 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import {StyleSheet, Text, Image, Platform, ScrollView, View, TouchableHighlight} from 'react-native';
 import {NavigationContext} from 'navigation-react';
 import {NavigationBar} from 'navigation-react-native';
 import Tweets from './Tweets';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 export default ({tweet: {account: {id: accountId, name, username, logo}, 
   text, time, retweets, likes, replies}}) => {
   const {stateNavigator} = useContext(NavigationContext);
+
+  const [backIcon, setBackIcon] = useState();
+
+  useEffect(() => {
+    FontAwesome5.getImageSource('arrow-left', 20, '#1da1f2').then(setBackIcon);
+  }, []);
+
   return (
     <>
       <NavigationBar
         title="Tweet"
-        navigationImage={require('./arrow.png')}
+        navigationImage={backIcon}
         barTintColor={Platform.OS === 'android' ? '#fff' : null}
         tintColor={Platform.OS === 'android' ? "#1da1f2" : null}
         onNavigationPress={() => {
