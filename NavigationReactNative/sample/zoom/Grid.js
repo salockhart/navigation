@@ -58,7 +58,9 @@ export default class Grid extends React.Component {
         <NavigationBar
           largeTitle={true}
           title="Colors"
-          barTintColor={Platform.OS === 'android' ? '#fff' : null}>
+          barTintColor="#f00"
+          tintColor="#fff"
+          titleColor="#fff">
           <SearchBar
             text={text}
             autoCapitalize="none"
