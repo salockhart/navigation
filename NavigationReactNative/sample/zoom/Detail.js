@@ -1,10 +1,11 @@
-import React, {useContext} from 'react';
-import {Platform, StyleSheet, ScrollView, Text, View, TouchableHighlight} from 'react-native';
-import {NavigationContext} from 'navigation-react';
-import {NavigationBar, RightBar, BarButton, TitleBar, SharedElement} from 'navigation-react-native';
+import { NavigationContext } from 'navigation-react';
+import { BarButton, NavigationBar, RightBar, SharedElement, TitleBar } from 'navigation-react-native';
+import React, { useContext, useRef } from 'react';
+import { ActionSheetIOS, findNodeHandle, Platform, ScrollView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 const Detail = ({colors, color, name, filter, search}) => {
   const {stateNavigator} = useContext(NavigationContext);
+  const anchorRef = useRef();
   return (
     <>
       <NavigationBar
@@ -15,8 +16,16 @@ const Detail = ({colors, color, name, filter, search}) => {
           <View style={{backgroundColor: color, width: 28, height: 28}}/>
         </TitleBar>
         <RightBar>
-          <BarButton title="cancel" show="always" systemItem="cancel" onPress={() => {
-            stateNavigator.navigateBack(1);
+          <BarButton ref={anchorRef} title="cancel" show="always" systemItem="cancel" onPress={() => {
+            ActionSheetIOS.showActionSheetWithOptions({
+              options: ['Go Back', 'Cancel'],
+              cancelButtonIndex: 1,
+              anchor: findNodeHandle(anchorRef.current)
+            }, (idx) => {
+              if (idx === 0) {
+                stateNavigator.navigateBack(1);
+              }
+            })
           }} />
         </RightBar>
       </NavigationBar>
