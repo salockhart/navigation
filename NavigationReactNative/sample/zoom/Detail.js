@@ -1,7 +1,7 @@
-import React, {useContext} from 'react';
-import {Platform, StyleSheet, ScrollView, Text, View, TouchableHighlight} from 'react-native';
-import {NavigationContext} from 'navigation-react';
-import {NavigationBar, RightBar, BarButton, TitleBar, SharedElement} from 'navigation-react-native';
+import { NavigationContext } from 'navigation-react';
+import { BarButton, NavigationBar, RightBar, SharedElement, TitleBar, LeftBar } from 'navigation-react-native';
+import React, { useContext } from 'react';
+import { Platform, ScrollView, StyleSheet, Text, TouchableHighlight, View } from 'react-native';
 
 const Detail = ({colors, color, name, filter, search}) => {
   const {stateNavigator} = useContext(NavigationContext);
@@ -14,8 +14,19 @@ const Detail = ({colors, color, name, filter, search}) => {
           <Text style={styles.titleBarText}>Color</Text>
           <View style={{backgroundColor: color, width: 28, height: 28}}/>
         </TitleBar>
+        <LeftBar>
+          <BarButton title="cancel 1" show="always" onPress={() => {
+            stateNavigator.navigateBack(1);
+          }} />
+          <BarButton title="cancel 2" show="always" onPress={() => {
+            stateNavigator.navigateBack(1);
+          }} />
+        </LeftBar>
         <RightBar>
-          <BarButton title="cancel" show="always" systemItem="cancel" onPress={() => {
+          <BarButton title="cancel 1" show="always" onPress={() => {
+            stateNavigator.navigateBack(1);
+          }} />
+          <BarButton title="cancel 2" show="always" onPress={() => {
             stateNavigator.navigateBack(1);
           }} />
         </RightBar>
