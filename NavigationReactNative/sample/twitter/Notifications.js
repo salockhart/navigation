@@ -15,7 +15,7 @@ export default ({notifications}) => {
           <TabBar selectedTintColor="#1da1f2" />
         </NavigationBar>
         <TabBar primary={false}>
-          <TabBarItem title="All">
+          <TabBarItem title="All" testID="allTab">
             <FlatList
               data={notifications}
               keyExtractor={(_item, index) => '' + index}
@@ -41,7 +41,7 @@ export default ({notifications}) => {
                 ) : <TweetItem {...item} />
               )} />
           </TabBarItem>
-          <TabBarItem title="Mentions">
+          <TabBarItem title="Mentions" testID="mentionsTab">
             <FlatList
               data={notifications.filter(({mention}) => mention)}
               keyExtractor={(_item, index) => '' + index}
