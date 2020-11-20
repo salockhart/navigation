@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import {StyleSheet, Text, Platform, View, Animated} from 'react-native';
 import {NavigationContext} from 'navigation-react';
-import {NavigationBar, CoordinatorLayout, CollapsingBar} from 'navigation-react-native';
+import {NavigationBar, CoordinatorLayout, CollapsingBar, BarButton} from 'navigation-react-native';
 import Tweets from './Tweets';
 
 export default ({timeline: {id, name, username, logo, bio, 
@@ -24,7 +24,15 @@ export default ({timeline: {id, name, username, logo, bio,
         style={{height: 120}}
         onNavigationPress={() => {
           stateNavigator.navigateBack(1)
-        }}>
+        }}
+
+        rightBarButtons={[
+          <BarButton
+            title="Edit"
+            onPress={() => {}}
+          />,
+        ]}
+        >
         <CollapsingBar>
           <View style={{backgroundColor: colors[1], flex: 1}} />
         </CollapsingBar>
